@@ -1,2 +1,2 @@
-# mcgillhackathon18
-Resources for Introduction to Arduino Workshop
+# Introduction to Arduino: McGill Hackathon 2018
+Resources for Introduction to Arduino Workshop.
