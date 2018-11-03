@@ -9,12 +9,13 @@ Based on https://github.com/jingnanshi/RandomWalk-arduino
 #include <Servo.h>// Library that loads commands to servo objects
 #include <math.h>  // for the absolute value function
 
-#define DISTSENSOR 14
+// Ultrasonic sensor
+long duration;
+int distance;
+int trigPin = 3;
+int echoPin = 4;  
 
-int distanceReading(){
-  int dist = analogRead(DISTSENSOR-14);
-  return dist;
-}
+int pos = 0;    // variable to store the servo position
 
 Servo leftDrive;  // create servo object for the left wheel
 Servo rightDrive; // another servo object for the right wheel
@@ -34,15 +35,27 @@ void setup()
 {
   leftDrive.attach(9);  // attaches the servo on pin 9 
   rightDrive.attach(10);  // attaches the servo on pin 10
-  Serial.begin(9600);  
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  Serial.begin(9600);
+  dontMove(5000);
 }
 
-//random routine with tweakable parameters
+//random walk routine 
 
 void loop() {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration*0.034/2;
+  Serial.print("Distance: ");  
+  Serial.println(distance); // open serial monitor to see data output
   
-  // if the robot is about to hit a wall. set boundary as necessary
-  if (distanceReading() > BOUNDARY){ 
+  // see if the robot is about to hit a wall. set boundary as necessary
+  if (distance > BOUNDARY){ 
     halt();
     // randomly turn
     randomTurn();
