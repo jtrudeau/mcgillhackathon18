@@ -13,8 +13,8 @@ Servo rightDrive; // another servo object for the right wheel
 // Ultrasonic sensor
 long duration;
 int distance;
-int trigPin = 4;
-int echoPin = 3;  
+int trigPin = 3;
+int echoPin = 4;  
 
 int pos = 0;    // variable to store the servo position
 
