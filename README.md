@@ -16,7 +16,10 @@ https://sparks.gogo.co.nz/ch340.html
 
 3. Follow the instructions presented in the workshop.
 
-4. More resources here:
+Random walk, part 3 example, based on https://github.com/jingnanshi/RandomWalk-arduino
+See also, more generally https://playground.arduino.cc/Main/RandomWalk
+
+More resources here:
 https://drive.google.com/drive/folders/1ch-8t-ZsVOIlSEqwdoMMmxW3y9N60fDK?usp=sharing
 
 
