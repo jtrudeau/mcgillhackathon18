@@ -15,7 +15,7 @@ void setup()
 {
   leftDrive.attach(9);  // attaches the servo on pin 9 
   rightDrive.attach(10);  // attaches the servo on pin 10
-  
+  dontMove(2000);
 }
 
 //example routine, drives in a circle or forward
