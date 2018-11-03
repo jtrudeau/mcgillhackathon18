@@ -2,30 +2,102 @@
 /*
 Arduino Sketch (Program) to contol servo motors driving a micro-robot and perform a Random walk
 Latest version October 30, 2018
+
+Based on https://github.com/jingnanshi/RandomWalk-arduino
 */
 
 #include <Servo.h>// Library that loads commands to servo objects
+#include <math.h>  // for the absolute value function
+
+#define DISTSENSOR 14
+
+int distanceReading(){
+  int dist = analogRead(DISTSENSOR-14);
+  return dist;
+}
 
 Servo leftDrive;  // create servo object for the left wheel
 Servo rightDrive; // another servo object for the right wheel
 
 int pos = 0;    // variable to store the servo position
+const int BOUNDARY = 520;
+const int TURN_POWER = TURN_POWER;
+const int FORWARD_DELAY = 20;
+
+const int random_forward_degree = 10;
+const int delay_per_degree = 20;
+
+const int random_turn_base = 120;
+const int random_turn_ceiling = 240;
 
 void setup()
 {
   leftDrive.attach(9);  // attaches the servo on pin 9 
   rightDrive.attach(10);  // attaches the servo on pin 10
-  
+  Serial.begin(9600);  
 }
 
-//example routine, drives in a circle or forward
+//random routine with tweakable parameters
 
-void loop()
-{
+void loop() {
+  
+  // if the robot is about to hit a wall. set boundary as necessary
+  if (distanceReading() > BOUNDARY){ 
+    halt();
+    // randomly turn
+    randomTurn();
+  } else {
+    // randomly move forward
+    randomForward();
+  }
 
-dontMove(1000); 
-turnRight(1000);
+}
 
+// choose a random angle to turn
+
+void randomTurn(){
+  // turn left or right random number
+  long randNumber1 = random(1,10);
+  // turning degree random number
+  long randNumber2 = random(random_turn_base,random_turn_ceiling);
+  int turn_time  = (int) randNumber2 * delay_per_degree;
+
+  // turn right
+  if (randNumber1 >= 5){
+    
+    turnRight(TURN_POWER);
+    delay(turn_time);
+    halt();
+  }
+  // turn left
+  else{
+    turnLeft(TURN_POWER);
+    delay(turn_time);
+    halt();
+  }
+}
+
+/* randomForward(): randomly choose an angle and move forward
+*
+*/
+
+void randomForward(){
+  long rand_turn = random(random_forward_degree);
+  long rand_dir = random(1,10);
+
+  if (rand_dir > 5){
+
+    turnRight(TURN_POWER);
+    delay(rand_turn * delay_per_degree);
+
+  } else {
+    turnLeft(TURN_POWER);
+    delay(rand_turn * delay_per_degree);
+
+  }
+  driveForward(TURN_POWER);
+  dontMove(20); 
+  
 }
 
 
