@@ -14,6 +14,7 @@ https://www.arduino.cc/en/Main/Software
 2. Install necessary drivers for your OS to interface with the Arduino nano clones used in the workshop:
 https://sparks.gogo.co.nz/ch340.html
 
-3. Loads of resources here:
+3. More resources here:
+https://drive.google.com/drive/folders/1ch-8t-ZsVOIlSEqwdoMMmxW3y9N60fDK?usp=sharing
 
 
