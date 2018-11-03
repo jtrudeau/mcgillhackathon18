@@ -1,7 +1,6 @@
 
 /*
 Arduino Sketch (Program) to contol servo motors driving a micro-robot
-J.F. Briere and J. Trudeau 
 Latest version October 3, 2018
 */
 
@@ -41,6 +40,15 @@ correspond to CW or CCW rotation.
 For example, for foward motion the right wheel may rotate CW and the left wheel CCW.
 */
 
+
+//drives straight forward for t milliseconds
+void driveForward(int t)
+{
+  leftDrive.write(0);
+  rightDrive.write(180);
+  delay(t); 
+}
+
 //turns right for t  milliseconds by reducing power to the right wheel moving 
 void turnRight(int t)
 {
@@ -49,6 +57,13 @@ void turnRight(int t)
   delay(t); 
 }
 
+//turns left for t  milliseconds by reducing power to the left wheel moving 
+void turnLeft(int t)
+{
+  leftDrive.write(20);
+  rightDrive.write(180);
+  delay(t); 
+}
 
 //stops moving for t milliseconds
 void dontMove(int t)
@@ -56,6 +71,14 @@ void dontMove(int t)
   leftDrive.write(90);
   rightDrive.write(90);
   delay(t);
+}
+
+//drives straight backward full power for t milliseconds
+void driveBackward(int t)
+{
+  leftDrive.write(180);
+  rightDrive.write(0);
+  delay(t); 
 }
 
 //end.
