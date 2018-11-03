@@ -9,7 +9,6 @@ See: https://www.arduino.cc/en/guide/introduction
 Simple instructions for getting started:
 
 1. Install Arduino IDE or use the web editor:
-
 https://www.arduino.cc/en/Main/Software
 
 2. Install necessary drivers for your OS to interface with the Arduino nano clones used in the workshop:
